@@ -1,7 +1,7 @@
 {
   "name": "@naresh699/ai-context",
-  "version": "1.0.0",
-  "description": "Cross-tool AI context layer — one source of truth for Claude, Cursor, Copilot, and more",
+  "version": "1.0.1",
+  "description": "Cross-tool AI context layer — one source of truth for Claude, Cursor, Copilot, ChatGPT, Gemini, and more",
   "main": "cli.js",
   "bin": {
     "aic": "cli.js"
