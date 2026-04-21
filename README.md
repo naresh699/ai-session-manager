@@ -1,6 +1,6 @@
 # ai-context
 
-> Cross-tool AI context layer — one source of truth for Claude, Cursor, Copilot, and more.
+> Cross-tool AI context layer — one source of truth for Claude, Cursor, Copilot, ChatGPT, Gemini, and more.
 
 **The problem:** Every AI tool has its own memory. Switch from Claude to Cursor mid-task, start a new session, or hand off to a teammate — and context is gone. You re-explain from scratch every time.
 
@@ -16,14 +16,31 @@ npm install -g @naresh699/ai-context
 
 ---
 
+## Supported tools
+
+| Tool | Type | How context is delivered |
+|---|---|---|
+| Claude Code | IDE / CLI | Auto-loaded via `CLAUDE.md` |
+| Cursor | IDE | Auto-loaded via `.cursorrules` |
+| GitHub Copilot | IDE | Auto-loaded via `.github/copilot-instructions.md` |
+| Claude Chat | Browser | Paste output of `aic load --tool chat` |
+| ChatGPT | Browser | Paste output of `aic load --tool chatgpt` |
+| Gemini | Browser | Paste output of `aic load --tool gemini` |
+
+**IDE tools** get context automatically — no copy-paste needed. **Browser tools** get a clean, ready-to-paste prompt.
+
+---
+
 ## How it works
 
 ```
 .ai/context.json          ← single source of truth (commit this)
        │
-       ├──► CLAUDE.md                        (Claude Code)
-       ├──► .cursorrules                     (Cursor)
-       └──► .github/copilot-instructions.md  (GitHub Copilot)
+       ├──► CLAUDE.md                        (Claude Code — auto-loaded)
+       ├──► .cursorrules                     (Cursor — auto-loaded)
+       ├──► .github/copilot-instructions.md  (GitHub Copilot — auto-loaded)
+       │
+       └──► aic load --tool chat             (Claude Chat / ChatGPT / Gemini — copy-paste)
 ```
 
 You edit context once. `aic sync` (or `aic save`) regenerates all tool files automatically.
@@ -72,9 +89,11 @@ Captures: summary, decisions, work in progress, blockers, next steps, notes.
 Reads context and prints a formatted resume prompt.
 
 ```bash
-aic load                  # for Claude Code / Cursor (formatted)
-aic load --tool chat      # copyable plain-text prompt for Claude Chat / ChatGPT / Gemini
-aic load --silent         # raw JSON for scripting
+aic load                       # formatted output for Claude Code / Cursor
+aic load --tool chat           # copyable prompt for Claude Chat
+aic load --tool chatgpt        # copyable prompt for ChatGPT
+aic load --tool gemini         # copyable prompt for Gemini
+aic load --silent              # raw JSON for scripting
 ```
 
 ### `aic sync`
@@ -142,6 +161,8 @@ aic load
 
 - Claude's memory doesn't follow you to Cursor
 - Cursor's rules don't sync to Copilot
+- ChatGPT's memory doesn't know your codebase
+- Gemini doesn't know what you decided yesterday
 - None of them share state across teammates
 - All of them lose session-level context (decisions, WIP, blockers) when a conversation ends
 
