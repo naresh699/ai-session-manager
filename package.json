@@ -1,0 +1,34 @@
+{
+  "name": "@naresh699/ai-context",
+  "version": "1.0.0",
+  "description": "Cross-tool AI context layer — one source of truth for Claude, Cursor, Copilot, and more",
+  "main": "cli.js",
+  "bin": {
+    "aic": "cli.js"
+  },
+  "keywords": [
+    "claude",
+    "cursor",
+    "copilot",
+    "ai",
+    "context",
+    "developer-tools",
+    "claude-code",
+    "session"
+  ],
+  "author": "naresh699",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "enquirer": "^2.4.1",
+    "ora": "^7.0.1",
+    "boxen": "^7.1.1",
+    "dayjs": "^1.11.10",
+    "fs-extra": "^11.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "module"
+}
